@@ -1,6 +1,7 @@
 class Ability
   include CanCan::Ability
 
+
   def initialize(user)
     # Define abilities for the passed in user here. For example:
     #
@@ -31,11 +32,37 @@ class Ability
 
 
     user ||= User.new # guest user (not logged in)
-    if user.role? :adminstrator
+
+    if user.role == "administrator"
       can :manage, :all
     else
       can :read, :all
     end
+
+
+
+    # If you want only CRUD actions on object, you should create custom action that called :crud
+    # for example, and use it instead of :manage:
+    #alias_action :create, :read, :update, :destroy, :to => :crud
+
+
+    #if user.role? :administrator
+    #  can :manage, :all
+    #end
+
+    #if user.role? :moderator
+    #  can :manage, Article
+    #end
+
+    #if user.role? :editor
+    #  can :crud, Article
+    #else
+    #  can :read, Article
+    #  cannot :manage, :all
+    #end
+
+
+
 
 
   end

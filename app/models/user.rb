@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = %w[administrator moderator editor]
 
-  def role?(r)
-    role.include? r.to_s
+  def role?(role)
+    role.include? role.to_s
   end
 end
