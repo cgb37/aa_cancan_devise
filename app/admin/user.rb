@@ -33,7 +33,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :role, as: :radio, collection: {Editor: "editor", Moderator: "moderator", Administrator: "administrator"}
+      f.input :role, as: :radio, collection: {Member: "member", Author: "author", Moderator: "moderator", Administrator: "administrator"}
     end
     f.actions
   end
