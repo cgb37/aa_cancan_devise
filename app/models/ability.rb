@@ -33,7 +33,7 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.role == "administrator"
+    if user.has_role? :administrator
       can :manage, :all
     else
       can :read, :all
