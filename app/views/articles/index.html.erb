@@ -18,12 +18,12 @@
         <td><%= article.body %></td>
         <td><%= link_to 'Show', article %></td>
         <td>
-          <% if can? :update, @article %>
+          <% if can? :update, article %>
             <%= link_to 'Edit', edit_article_path(article) %>
           <% end %>
         </td>
         <td>
-          <% if can? :destroy, @article %>
+          <% if can? :destroy, article %>
             <%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %>
         </td>
@@ -34,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Article', new_article_path %>
+<% if can? :create, Article %>
+    <%= link_to 'New Article', new_article_path %>
+<% end %>

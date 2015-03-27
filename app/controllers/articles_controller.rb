@@ -15,7 +15,16 @@ class ArticlesController < InheritedResources::Base
 
 
 
-
+  def create
+    @article = Article.new(article_params)
+    @article.user_id = current_user.id if current_user
+    if @article.save
+      flash[:success] = "Content Successfully Created"
+      redirect_to @article
+    else
+      render 'new'
+    end
+  end
 
 
   private
@@ -26,7 +35,7 @@ class ArticlesController < InheritedResources::Base
     end
 
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :user_id)
     end
 end
 

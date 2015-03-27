@@ -33,6 +33,16 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
+
+    # If you want only CRUD actions on object, you should create custom action that called :crud
+    # for example, and use it instead of :manage:
+    alias_action :create, :read, :update, :destroy, :to => :crud
+
+
+    if user.has_role? :author
+      can :crud, Article, :user_id => user.id
+    end
+
     if user.has_role? :administrator
       can :manage, :all
     else
@@ -41,9 +51,6 @@ class Ability
 
 
 
-    # If you want only CRUD actions on object, you should create custom action that called :crud
-    # for example, and use it instead of :manage:
-    #alias_action :create, :read, :update, :destroy, :to => :crud
 
 
     #if user.role? :administrator
